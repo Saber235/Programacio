@@ -97,3 +97,5 @@ select * from Empresas inner join Surcursales on Empresas.NIT = Surcursales.NIT 
  select * from  Surcursales;
  select * from  Surcursales,Ciudad where Surcursales.Id_Surc = Ciudad.Id_Surc
  
+ select * from  select_from
+ 
