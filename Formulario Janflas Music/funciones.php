@@ -48,4 +48,33 @@
                 }
 
 
-   
+                function getUsuarios() {
+                    // Conectar a la base de datos
+                    $conexion = new PDO("mysql:host=localhost;dbname=mi_base_de_datos", "usuario", "contraseña");
+                  
+                    // Ejecutar la consulta SQL
+                    $sentencia = $conexion->prepare("SELECT distinct usuario from usuario where usuario like 'mari% '");
+                    $sentencia->execute();
+                  
+                    // Iterar sobre los resultados
+                    $usuarios = [];
+                    while ($fila = $sentencia->fetch()) {
+                      $usuarios[] = $fila["usuario"];
+                    }
+                  
+                    // Cerrar la conexión
+                    $conexion = null;
+                  
+                    // Devolver los usuarios
+                    return $usuarios;
+                  }
+                  
+                  // Obtener los usuarios
+                  $usuarios = getUsuarios();
+                  
+                  // Imprimir los usuarios
+                  foreach ($usuarios as $usuario) {
+                    echo $usuario . "<br>";
+                  }
+                  
+?>
