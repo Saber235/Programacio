@@ -1,0 +1,54 @@
+
+body{
+    margin: 0;
+    background-color: #f0f1f1;
+}
+
+footer{
+
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+#contenedor-encabezado2{
+
+    /*border: solid 1px;*/
+    padding-left: 15%;
+    height: 40px; 
+    background-color: yellow; 
+    color: gray;
+}
+
+#contenedor-encabezado2-azul{
+
+    text-align: center;
+    background-color: #59c5e8;
+    font-size: 8px;
+    width: 30px;
+}
+
+#contenedor-pata-gris{
+
+    color: gray;
+    font-size: 9px;
+}
+
+#imagen-pata-empresas-logos{
+
+    width: 250;
+}
+
+#imagen-pata-linea{
+
+    width: 100%;
+}
+
+.contenedor-producto{
+
+    width: 140px; 
+    /*border: solid 1px;*/
+    margin: 4px;
+    background-color: white;
+    float: left;
+}
+
