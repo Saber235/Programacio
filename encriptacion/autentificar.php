@@ -1,50 +1,50 @@
 <?php
-include('encriptacion.php');
-function autenticar($Documento, $Clave)
-{
-    // Conectar a la base de datos
+function autenticar($documento,$clave){
+    $documento = '';
+    $clave = '';
+    $salida= '';
+
     $conexion = mysqli_connect('localhost', 'root', 'root', 'pruebita2');
 
-    // Validar los datos
-    if (!is_numeric($Documento)) {
-        throw new Exception('El Documento debe ser un número');
-    }
-    if (empty($Clave)) {
-        throw new Exception('La Clave no puede estar vacía');
-    }
+    // Realizar la consulta SQL
+    $query = "SELECT COUNT(*) FROM Personas WHERE Documento='333' AND Clave='VVVp'";
 
-    // Ejecutar la consulta
-    $sq = "SELECT (Nombre) from Personas where Documento = $Documento
-    and Clave = $Clave ";
+    $result = mysqli_query($conexion, $query);
 
+    // Comprobar el resultado
+    while ($fila = mysqli_fetch_array($result)){
+        // Comprobar si el usuario está autenticado
+        if ($fila[0] > 0) {
+            // El usuario está autenticado
+            $salida = "Ya esta autenticado";
+            break;
+        } else {
+            // El usuario no está autenticado
+            $salida = "No esta autenticado";
+        }
+        // Cerrar la conexión
+        mysqli_close($conexion);
+    }
+    return $salida;
+}
+$documento = "";
+$clave = "";
+$salida = autenticar($documento,$clave);
+echo $salida;
+
+function Mostrar($documento){
+    $salida = '';
+    $conexion = mysqli_connect('localhost', 'root', 'root', 'pruebita2');
+    $sq = "SELECT COUNT(*) FROM Personas WHERE Documento='$documento' ";
     $resultado = $conexion->query($sq);
-
-    // Verificar si el usuario existe
-    if (!$resultado) {
-        return false;
+    while ($fila = mysqli_fetch_array($resultado)){
+        $salida .= $fila[0];
+        $salida .= $fila[1];
+        $salida .= $fila[2];
     }
+    return $salida;
 
-    // Obtener la clave del usuario
-    $fila = mysqli_fetch_array($resultado);
-    $ClaveEncriptada = $fila[0];
-    
 
-    // Comparar la clave ingresada con la clave de la base de datos
-    $resultado = password_verify($Clave, $ClaveEncriptada);
-
-    // Cerrar la conexión
-    $conexion->close();
-
-    // Devolver el resultado
-    return $resultado;
 }
-$Documento = '444';
-$Clave = 'XXXp';
 
-$resultado = autenticar($Documento, $Clave);
-
-if ($resultado) {
-    echo 'El usuario está autenticado';
-} else {
-    echo 'El usuario no está autenticado';
-}
+?>
